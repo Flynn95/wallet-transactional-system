@@ -1,0 +1,9 @@
+<h2 class="mt-5 mb-3">Team Edit Form</h2>
+
+<%= form_with model: @team, method: :patch do |f| %>
+  <div class="mb-3">
+    <label for="name">Name</label>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+<% end %>

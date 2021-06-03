@@ -1,0 +1,13 @@
+<h2 class="mt-5 mb-3">Deposit Form</h1>
+
+<%= form_tag '/transactions/deposit', method: :post do %>
+  <div class="mb-3">
+    <label for="walletId">Sources</label>
+    <%= select_tag 'transaction[source_wallet_id]', options_for_select(@sources.collect { |source| [source.attachable.name, source.unique_address] }), class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <label for="amount">Amount</label>
+    <input type="number" name='transaction[amount]' min=0 class="form-control" id="amount" placeholder="0">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+<% end %>

@@ -1,0 +1,32 @@
+<h2 class="mt-5 mb-3">Accounts List</h1>
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-10 col-md-12 mx-auto">
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Wallet Id</td>
+            <th scope="col">Balance</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sources.each do |source| %>
+            <tr>
+              <td><%= source.attachable.name %></td>
+              <td><%= source.unique_address %></td>
+              <td><%= source.current_balance %></td>
+              <td><%= link_to 'Destroy', url_for(source.attachable), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to 'Edit', url_for([:edit, source.attachable]) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</section>

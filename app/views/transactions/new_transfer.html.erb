@@ -1,0 +1,17 @@
+<h2 class="mt-5 mb-3">Transfer Form</h1>
+
+<%= form_tag '/transactions/transfer', method: :post do %>
+  <div class="mb-3">
+    <label for="source_wallet_id">Source</label>
+    <%= select_tag 'transaction[source_wallet_id]', options_for_select(@sources.collect { |source| [source.attachable.name, source.unique_address] }), class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <label for="destination_wallet_id">Destination</label>
+    <%= select_tag 'transaction[destination_wallet_id]', options_for_select(@sources.collect { |source| [source.attachable.name, source.unique_address] }), class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <label for="amount">Amount</label>
+    <input type="number" name='transaction[amount]' min=0 class="form-control" id="amount" placeholder="0">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+<% end %>

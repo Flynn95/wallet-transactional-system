@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WalletTransactionalSystem</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link <%= current_page?(accounts_transactions_path) && 'active' %>" href=<%= accounts_transactions_path %>>Accounts</a>
+            <a class="nav-link <%= current_page?(transactions_path) && 'active' %>" href=<%= transactions_path %>>Transaction History</a>
+            <a class="nav-link <%= current_page?(new_deposit_transactions_path) && 'active' %>" href=<%= new_deposit_transactions_path %>>Deposit</a>
+            <a class="nav-link <%= current_page?(new_withdraw_transactions_path) && 'active' %>" href=<%= new_withdraw_transactions_path %>>Withdraw</a>
+            <a class="nav-link <%= current_page?(new_transfer_transactions_path) && 'active' %>" href=<%= new_transfer_transactions_path %>>Transfer</a>
+            <a class="nav-link <%= current_page?(new_user_path) && 'active' %>" href=<%= new_user_path %>>New User</a>
+            <a class="nav-link <%= current_page?(new_team_path) && 'active' %>" href=<%= new_team_path %>>New Team</a>
+            <a class="nav-link <%= current_page?(new_stock_path) && 'active' %>" href=<%= new_stock_path %>>New Stock</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <% if @messages.present? %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <% if @messages.is_a?(String) %>
+            <p><%= @messages %></p>
+          <% elsif @messages.is_a?(Array) %>
+            <% @messages.each do |message| %>
+              <p><%= message %></p>
+            <% end %>
+          <% end %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+
+      <% flash.each do |type, msg| %>
+        <div class="alert alert-info">
+          <%= msg %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+  </body>
+</html>
