@@ -1,4 +1,5 @@
 module Transactions
+  class TransferValidationError < StandardError; end
   class TransferService < BaseService
     attr_reader :transfer_params
 
@@ -12,9 +13,11 @@ module Transactions
         destination_form = Transactions::TransferToForm.new(to_form_attributes)
 
         result = source_form.submit && destination_form.submit
-        return return_validation_error(source_form, destination_form) unless result
+        raise TransferValidationError unless result
 
         [nil, result]
+      rescue TransferValidationError
+        return_validation_error(source_form, destination_form)
       end
     end
 
