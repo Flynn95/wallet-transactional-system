@@ -17,3 +17,39 @@ if TransactionStatus.all.blank?
     TransactionStatus.create!(status: enum, description: "#{type.capitalize} Transaction")
   end
 end
+
+if User.all.blank?
+  3.times do
+    User.create!(name: Faker::Name.name)
+  end
+end
+
+if Stock.all.blank?
+  Stock.create!(name: 'Bitcoin')
+  Stock.create!(name: 'Ethereum')
+  Stock.create!(name: 'Litecoin')
+end
+
+if Team.all.blank?
+  3.times do |n|
+    Team.create!(name: "Team #{n + 1}")
+  end
+end
+
+if Wallet.all.blank?
+  User.all.each do |user|
+    user.create_wallet!(attachable: user)
+  end
+  Stock.all.each do |stock|
+    stock.create_wallet!(attachable: stock)
+  end
+  Team.all.each do |team|
+    team.create_wallet!(attachable: team)
+  end
+end
+
+if Transaction.all.blank?
+  User.all.each do |user|
+    user.wallet.transactions.create!(transaction_type: TransactionType.deposit.first, transaction_status: TransactionStatus.successful.first, amount: 1000)
+  end
+end

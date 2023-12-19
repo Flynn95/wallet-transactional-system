@@ -1,9 +1,9 @@
 #!/bin/sh
 
-bundle install
-rake db:create
-rake db:migrate
-rails db:seed
+set -e
 
-rm -f tmp/pids/server.pid
-bin/rails s -b 0.0.0.0
+if [ -f tmp/pids/server.pid ]; then
+  rm tmp/pids/server.pid
+fi
+
+bundle exec rails s -b 0.0.0.0
