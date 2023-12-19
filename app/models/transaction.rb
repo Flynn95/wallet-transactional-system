@@ -2,7 +2,7 @@
 #
 # Table name: transactions
 #
-#  id                    :bigint           not null, primary key
+#  id                    :string           not null, primary key
 #  source_wallet_id      :string           not null
 #  destination_wallet_id :string
 #  amount                :integer          not null

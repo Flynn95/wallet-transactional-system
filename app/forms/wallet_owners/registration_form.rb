@@ -5,18 +5,10 @@ module WalletOwners
 
       ActiveRecord::Base.transaction do
         owner = model_type.constantize.create!(attributes.except('model_type'))
-        Wallet.create!(attachable: owner, unique_address: unique_wallet_id)
+        Wallet.create!(attachable: owner)
       end
 
       true
-    end
-
-    private
-
-    def unique_wallet_id
-      unique_address = SecureRandom.uuid
-      unique_address = SecureRandom.uuid while Wallet.exists?(unique_address: unique_address)
-      unique_address
     end
   end
 end

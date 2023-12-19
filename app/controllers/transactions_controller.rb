@@ -14,7 +14,7 @@ class TransactionsController < ApplicationController
   def new_transfer; end
 
   def deposit
-    form, result = Transactions::DepositService.execute(deposit_params: deposit_withdraw_params)
+    form, result = Transactions::DepositService.new(deposit_params: deposit_withdraw_params).execute
 
     if result
       flash[:success] = 'Deposited successfully.'
@@ -27,7 +27,7 @@ class TransactionsController < ApplicationController
   end
 
   def withdraw
-    form, result = Transactions::WithdrawService.execute(withdraw_params: deposit_withdraw_params)
+    form, result = Transactions::WithdrawService.new(withdraw_params: deposit_withdraw_params).execute
 
     if result
       flash[:success] = 'Withdrawn successfully.'
@@ -40,7 +40,7 @@ class TransactionsController < ApplicationController
   end
 
   def transfer
-    full_messages, result = Transactions::TransferService.execute(transfer_params: transfer_params)
+    full_messages, result = Transactions::TransferService.new(transfer_params: transfer_params).execute
 
     if result
       flash[:success] = 'Transferred successfully.'

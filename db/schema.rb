@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_128116) do
 
   create_table "wallets", primary_key: "unique_address", id: :string, force: :cascade do |t|
     t.string "attachable_type", null: false
-    t.integer "attachable_id", null: false
+    t.bigint "attachable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["attachable_type", "attachable_id"], name: "index_wallets_on_attachable_type_and_attachable_id"
